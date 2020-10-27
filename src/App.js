@@ -1,25 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Game from './pages/Game.jsx';
+import AnotherGame from './pages/AnotherGame.jsx';
+import Nav from './layout/Nav.jsx';
+
+const paths = [{
+  name: 'Home',
+  path: '/',
+}, {
+  name: 'Stars',
+  path: '/stars',
+},
+{
+  name: 'AnotherGame',
+  path: '/game',
+}];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <CssBaseline/>
+        <Nav paths={paths}/>
+        <Switch>
+          <Route path='/stars'>
+            <Game game="Stars"/>
+          </Route>
+          <Route path='/game'>
+            <Game game="anotherGame"/>
+          </Route>
+          <Route path='/'>
+            <Home/>
+          </Route>
+        </Switch>
+      </Router>
   );
 }
 
